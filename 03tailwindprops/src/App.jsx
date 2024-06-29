@@ -12,8 +12,8 @@ let myArr =[1,2,2]
   return (
     <>
       <h1 className='bg-green-600 p-4 rounded-xl mb-4'>Tailwind Test</h1>
-      <Card channel ='vikash' someObj ={myObj} someArr={myArr} />
-      <Card/>
+      <Card username ='vikash' btnText='click me' />
+      <Card username='hitesh' btnText='visit me'/>
 
     </>
   )
