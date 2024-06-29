@@ -6,11 +6,15 @@ function App() {
   let [counter,setCounter] =useState(15)
 
   const addValue =()=>{
-    setCounter(++counter)
+    if (counter<20) {
+      setCounter(++counter)
+    }
   }
 
 const removeValue =()=>{
-  setCounter(--counter)
+  if (counter>0) {
+    setCounter(--counter)
+  }
 }
   
   return (
@@ -25,3 +29,6 @@ const removeValue =()=>{
 }
 
 export default App
+
+
+// assignment - value dont decrease after 0 and value dont increase after 20   - completed
