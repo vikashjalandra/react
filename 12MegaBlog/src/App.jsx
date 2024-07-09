@@ -3,6 +3,7 @@ import Rect, { useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import authService from './appwrite/auth'
 import {login,logout} from './store/authSlice'
+import { Footer, Header } from './components'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -20,16 +21,22 @@ function App() {
     .finally(()=> setLoading(false))
   },[])
   
-  if (loading) {
+  if (!loading) {
     return (
       <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-        Loading
+        <div className='w-full block'>
+          <Header/>
+          <main>
+            Todo: {/* <Outlet/> */}
+          </main>
+          <Footer/>
+        </div>
       </div>
     )
   } else{
     return (
       <>
-        <h1>Blog With AppWrite</h1>
+        <h1>Loading</h1>
   
       </>
     )
