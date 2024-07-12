@@ -7,6 +7,9 @@ import Button from './Button'
 import Input from './Input'
 import PostCard from './PostCard'
 import Select from './Select'
+import RTE from './RTE'
+import Signup from "./Signup";
+import Login from "./Login";
 
 export{
     Header,
@@ -17,5 +20,8 @@ export{
     Button,
     Input,
     PostCard,
-    Select
+    Select,
+    RTE,
+    Signup,
+    Login
 }
