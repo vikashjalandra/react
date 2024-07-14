@@ -6,22 +6,23 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
-function PostForm() {
+function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
     defaultValues: {
       title: post?.title || '',
-      slug: post?.slug || '',
+      slug: post?.$id || '',
       content: post?.content || '',
       status: post?.status || 'active'
     }
   })
 
   const navigate = useNavigate()
-  const userData = useSelector(state => state.user.userData)
+  const userData = useSelector((state) => state.auth.userData)
 
   const submit = async (data) => {
     if (post) {
-      data.image[0] ? service.uploadFile(data.image[0]) : null
+
+      const file = data.image[0] ? await service.uploadFile(data.image[0]) : null
 
       if (file) {
         service.deleteFile(post.featuredImage)
@@ -59,21 +60,21 @@ function PostForm() {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, '-')
-        .replace(/\s/g, '-')
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
 
     }
     return ''
   }, [])
 
   useEffect(() => {
-    const subscription = watch((value, name) => {
+    const subscription = watch((value, {name}) => {
       if (name === 'title') {
         setValue('slug', slugTransform(value.title, { shouldValidate: true }))
       }
     })
 
-    return()=>{
+    return () => {
       subscription.unsubscribe()
     }
   }, [watch, slugTransform, setValue])
