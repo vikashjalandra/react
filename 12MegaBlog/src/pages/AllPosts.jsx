@@ -15,17 +15,14 @@ function AllPosts() {
 
 
   return (
-    <div className='w-full py-8'>
-      <Container>
-        <div className='flex flex-wrap'>
-            {posts.map((posts)=>(
-                <div key={posts.$id} className='p-2 w-1/4'>
-                    <PostCard post={post}/>
+           <div className=" mx-auto grid w-full max-w-7xl items-center space-y-4 px-2 py-10 md:grid-cols-1 md:gap-6 md:space-y-0 lg:grid-cols-4" >
+            {posts.map((post)=>(
+                <div key={post.$id} className="rounded-md border" >
+                    <PostCard {...post}/>
                 </div>
             ))}
         </div>
-      </Container>
-    </div>
+  
   )
 }
 

@@ -17,7 +17,7 @@ const Input = forwardRef(function Input({
             }
             <input 
             type={type}
-            className={`px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-200 w-full ${className}`}
+            className={`px-3 py-2 rounded-none bg-white text-black outline-none focus:bg-gray-200 w-full border border-gray-400 ${className}`}
             ref={ref} {...prpos}
             id={id} />
         </div>

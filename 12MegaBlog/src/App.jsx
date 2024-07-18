@@ -1,4 +1,3 @@
-import './App.css'
 import Rect, { useState, useEffect } from 'react'
 import {useDispatch} from 'react-redux'
 import authService from './appwrite/auth'
@@ -24,11 +23,14 @@ function App() {
   
   if (!loading) {
     return (
-      <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className='min-h-screen flex flex-wrap content-between '>
         <div className='w-full block'>
           <Header/>
-          <main>
-            Todo: <Outlet/>
+          <main
+          style={{height:'94%'}}
+          className='flex flex-col justify-center align-middle'
+           >
+            <Outlet/>
           </main>
           <Footer/>
         </div>
@@ -37,7 +39,7 @@ function App() {
   } else{
     return (
       <>
-        <h1>Loading</h1>
+        <span class="loader"></span>
   
       </>
     )

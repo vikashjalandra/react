@@ -4,6 +4,7 @@ import service from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -12,7 +13,7 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.userid === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -45,12 +46,12 @@ export default function Post() {
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
+                                <Button bgColor="bg-black" className="mr-3 hover:bg-gray-900">
+                                    <Pencil/>
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
+                            <Button bgColor="bg-black" className="hover:bg-gray-900" onClick={deletePost}>
+                                <Trash2/>
                             </Button>
                         </div>
                     )}

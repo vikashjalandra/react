@@ -17,7 +17,11 @@ function PostForm({ post }) {
   })
 
   const navigate = useNavigate()
-  const userData = useSelector((state) => state.auth.userData)
+  const userData = useSelector((state) =>{
+    console.log(state.auth.userData);
+    return state.auth.userData
+  })
+
 
   const submit = async (data) => {
     if (post) {
@@ -34,23 +38,25 @@ function PostForm({ post }) {
 
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`)
-      } else {
-        const file = await service.uploadFile(data.image[0])
-
-        if (file) {
-          const fileId = file.$id
-          data.featuredImage = fileId
-          const dbPost = await service.createPost({
-            ...data,
-            userId: userData.$id
-          })
-          if (dbPost) {
-            navigate(`/post/${dbPost.$id}`)
-          }
+      }
+    } else {
+      const file = await service.uploadFile(data.image[0])
+      
+      if (file) {
+        
+        const fileId = file.$id
+        data.featuredImage = fileId
+        const dbPost = await service.createPost({
+          ...data,
+          userid: userData.$id
+        })
+        if (dbPost) {
+          navigate(`/post/${dbPost.$id}`)
         }
       }
-
     }
+
+
 
 
   }
@@ -68,9 +74,9 @@ function PostForm({ post }) {
   }, [])
 
   useEffect(() => {
-    const subscription = watch((value, {name}) => {
+    const subscription = watch((value, { name }) => {
       if (name === 'title') {
-        setValue('slug', slugTransform(value.title, { shouldValidate: true }))
+        setValue('slug', slugTransform(value.title), { shouldValidate: true })
       }
     })
 
@@ -85,13 +91,13 @@ function PostForm({ post }) {
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="mb-4 border border-gray-700 rounded-none"
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          className="mb-4 border border-gray-700 rounded-none"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
@@ -103,26 +109,26 @@ function PostForm({ post }) {
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="mb-4 border border-gray-700 rounded-none"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={service.getFilePreview(post.featuredImage)}
               alt={post.title}
-              className="rounded-lg"
+              className="border border-gray-700 rounded-none"
             />
           </div>
         )}
         <Select
           options={["active", "inactive"]}
           label="Status"
-          className="mb-4"
+          className="mb-4 border border-gray-700 rounded-none"
           {...register("status", { required: true })}
         />
-        <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+        <Button type="submit" bgColor="bg-black" className="w-full hover:bg-gray-800 rounded-none">
           {post ? "Update" : "Submit"}
         </Button>
       </div>

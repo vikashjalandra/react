@@ -32,7 +32,7 @@ function Login() {
             className='flex items-center justify-center w-full'
 
         >
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+            <div className={`mx-auto w-full max-w-lg rounded-none p-10 border border-black/10`}>
                 <div className='mb-2 flex justify-center'>
                     <span className='inline-block w-full max-w-[100px]'>
                         <Logo width='100%' />
@@ -71,8 +71,8 @@ function Login() {
                             required:true
                         })}
                         />
-                        <Button type='submit'
-                        className='w-full'
+                        <Button bgColor='bg-black' type='submit'
+                        className='w-full rounded-none hover:bg-gray-800'
                         >Sign In</Button>
 
                     </div>
